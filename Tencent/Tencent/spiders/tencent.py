@@ -6,10 +6,10 @@ class TencentSpider(scrapy.Spider):
     name = 'tencent'
     allowed_domains = ['tencent.com']
    
-    baseURL = "https://hr.tencent.com/position.php?start="
-    offset = 0
-    start_urls = [baseURL + str(offset)]
-
+    # baseURL = "https://hr.tencent.com/position.php?start="
+    # offset = 0
+    # start_urls = [baseURL + str(offset)]
+    start_urls = ['http://hr.tencent.com/position.php?start=0']
 
 
     def parse(self, response):

@@ -1,16 +1,27 @@
 # scrapy爬虫框架应用
 
-## 1. 打开cmd 在要建立爬虫程序的目录下输入
+#### 1. 打开cmd 在要建立爬虫程序的目录下输入
 
-> scrapy startproject itcast (“爬虫工程名称”)
+scrapy startproject xxxxx
 
-## 2. 在工程目录下的spiders文件夹下，输入
+#### 2. 在工程目录下的spiders文件夹下，输入
 
-> scrapy genspider itcast "http://www.itcast.cn"( 爬虫文件名称" “作用域”)
+scrapy genspider xxx "http://www.xxxx.com"
 
+#### 3. 爬虫核心
 
+3.1 编写items.py  明确需要爬取的内容
 
-## 3. 在spider文件中输入 scrapy crawl itcst 直接执行爬虫
+3.2 编写spiders/xxx.py 编写爬虫文件，处理请求和响应，提取数据
+
+- yield item
+- yield scrapy.Resquest(url,callback = self.parse
+
+3.3 编写pipelines.py 编写管道文件，处理spider返回的item数据，基本就是存json，在这里改编码.encode("utf-8")
+
+3.4 编写settings.py **启动管道组件**，其他设置。所有header都在这里，User-agent和其他的不在一起
+
+#### 4.  scrapy crawl xxx 直接执行爬虫
 
 
 
