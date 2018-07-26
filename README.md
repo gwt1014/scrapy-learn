@@ -22,5 +22,7 @@
 
 
 
+# 注意事项
+
 1. pipelines.py中 写json写入的时候 mode 要用wb 、 wb+，如果用w会报错
-2. spider内用xpath获取的内容并不是文本，而是一个一个xpath对象，所以后面要加.extract()进行“剥壳”。剥壳之后是列表，选【0】就可以了
+2. spider内用xpath获取的内容并不是文本，而是一个一个xpath对象，所以后面要加.extract()进行“剥壳”。剥壳之后是列表，选[0]就可以了
