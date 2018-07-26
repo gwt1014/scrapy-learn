@@ -15,3 +15,5 @@ class ItcastItem(scrapy.Item):
     title = scrapy.Field()
     info  = scrapy.Field()
     # pass
+
+

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+
 from ITcast.items import ItcastItem
 
 class ItcastSpider(scrapy.Spider):
