@@ -2,13 +2,35 @@
 
 #### 0. scrapy在windows环境下的安装，起手劝退！
 
+ 1.  lxml
 
+     >  pip install lxml
 
+ 2.  zope.interface
 
+     >  pip install zope.interface
 
+ 3.  twisted
 
+     > https://www.lfd.uci.edu/~gohlke/pythonlibs/#twisted
 
+     > pip install wheel
+     >
+     > pip install xxxxxx.whl 这里要跳到下载目录
 
+	4. pyOpenSSL
+
+    > pip install pyOpenSSL
+
+	5. pywin32
+
+    > https://pypi.pyhon.org/pypi/pypiwin32
+
+    > pip install pywin32xxxxxx.whl  这里要跳到下载目录
+
+	6. scrapy
+
+    > pip install scrapy
 
 
 
