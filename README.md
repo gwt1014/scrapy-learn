@@ -18,19 +18,20 @@
      >
      > pip install xxxxxx.whl 这里要跳到下载目录
 
-	4. pyOpenSSL
+4. pyOpenSSL
 
-    > pip install pyOpenSSL
+     > pip install pyOpenSSL
 
-	5. pywin32
+ 5.  pywin32
 
-    > https://pypi.pyhon.org/pypi/pypiwin32
+      https://pypi.pyhon.org/pypi/pypiwin32
 
-    > pip install pywin32xxxxxx.whl  这里要跳到下载目录
+     >  pip install pywin32xxxxxx.whl  这里要跳到下载目录
 
-	6. scrapy
+ 6.  scrapy
 
-    > pip install scrapy
+     >  pip install scrapy
+
 
 
 
