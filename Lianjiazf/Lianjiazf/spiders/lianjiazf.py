@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from Lianjiazf.items import LianjiazfItem
-
+import json
 
 class LianjaizfSpider(scrapy.Spider):
     name = 'lianjiazf'
@@ -11,21 +11,21 @@ class LianjaizfSpider(scrapy.Spider):
     def parse(self, response):
         # 获取每个城区的url，去掉燕郊和香河
         district_list = response.xpath(
-            '//*[@id="filter-options"]/dl[1]/dd/div/a/@href').extract()[:-2]
+            '//*[@id="filter-options"]/dl[1]/dd/div/a/@href').extract()[1:-2]
         for district in district_list:
-            yield scrapy.Request('https://bj.lianjia.com' + district, callback=self.parse_getblockUrl)
-            # print('http://bj.lianjia.com' + districtUrl)
+            yield scrapy.Request('https://bj.lianjia.com' + district, callback=self.parse_gethouseUrl)
+            #print('http://bj.lianjia.com' + district)
             # print('#'*40)
 
-    def parse_getblockUrl(self, response):
-        # 获取每个地区的url
-        block_list = response.xpath(
-            '//*[@id="filter-options"]/dl[1]/dd/div[2]/a/@href').extract()
-        for block in block_list:
-            # url里加"ng1nb1/"是为了不看车库和地下室
-            yield scrapy.Request('https://bj.lianjia.com' + block, callback=self.parse_gethouseUrl)
-            # print('http://bj.lianjia.com' + blockUrl)
-            # print('#'*40)
+    # def parse_getblockUrl(self, response):
+    #     # 获取每个地区的url
+    #     block_list = response.xpath(
+    #         '//*[@id="filter-options"]/dl[1]/dd/div[2]/a/@href').extract()
+    #     for block in block_list:
+    #         # url里加"ng1nb1/"是为了不看车库和地下室
+    #         yield scrapy.Request('https://bj.lianjia.com' + block, callback=self.parse_gethouseUrl)
+    #         # print('http://bj.lianjia.com' + blockUrl)
+    #         # print('#'*40)
 
     def parse_gethouseUrl(self, response):
         # 获取每个地区的二手房的URL
@@ -41,16 +41,16 @@ class LianjaizfSpider(scrapy.Spider):
         ################################################################
         # # 下一页
         # # 每个页面进去以后 都有当前页和总页数，根据这个进行判断
-        # totalPage = json.loads(response.xpath(
-        #     '//div[@class="page-box house-lst-page-box"]/@page-data').extract()[0])["totalPage"]
-        # curPage = json.loads(response.xpath(
-        #     '//div[@class="page-box house-lst-page-box"]/@page-data').extract()[0])["curPage"]
-        # if curPage < totalPage:
-        #     next_page = curPage + 1
-        #     url = 'http://bj.lianjia.com' + \
-        #         response.xpath('//div[@class="page-box house-lst-page-box"]/@page-url').extract()[
-        #             0].replace("{page}", str(next_page))
-        #     yield scrapy.Request(url, callback=self.parse_gethouseUrl)
+        totalPage = json.loads(response.xpath(
+            '//div[@class="list-wrap"]/div[2]/@page-data').extract()[0])["totalPage"]
+        curPage = json.loads(response.xpath(
+            '//div[@class="list-wrap"]/div[2]/@page-data').extract()[0])["curPage"]
+        if curPage < totalPage:
+            next_page = curPage + 1
+            url = 'http://bj.lianjia.com' + \
+                response.xpath('//div[@class="list-wrap"]/div[2]/@page-url').extract()[
+                    0].replace("{page}", str(next_page))
+            yield scrapy.Request(url, callback=self.parse_gethouseUrl)
 
     def parse_gethouseInfo(self, response):
         # 在房屋页面获取各种信息
